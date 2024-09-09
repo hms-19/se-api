@@ -1,0 +1,23 @@
+version: '3.9'
+services:
+  app: 
+    container_name: sports_empire
+    restart: always
+    ports:
+      - 3001:4000
+    build: .
+    environment:
+      PORT: 4000
+      MONGODB_URI: mongodb://mongo:27018
+      DB_NAME: sports_empire_db
+    depends_on: 
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - '27018:27017'
+    volumes:
+      - mongo:/data/db
+volumes:
+  mongo:
